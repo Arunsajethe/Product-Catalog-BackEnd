@@ -1,0 +1,16 @@
+package project.training.productcatalog.product.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Sub_Product_Response {
+	
+	private String sname;
+
+}

@@ -1,0 +1,21 @@
+package project.training.productcatalog.product.rep;
+
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
+
+import project.training.productcatalog.product.model.Product;
+
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+	
+	@Query("from Product where pname = ?1 and category = ?2")
+	List<Product> findByPnameCategory(String pname, String category);
+	
+	@Modifying
+	@Transactional
+	@Query("delete from Product where pname = ?1 and category =?2")
+	void removeProductItem(String pname, String category);
+
+}

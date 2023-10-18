@@ -1,0 +1,24 @@
+package project.training.productcatalog.product.controller;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
+import project.training.productcatalog.product.model.Product;
+import project.training.productcatalog.product.service.ProductService;
+
+@RestController
+@RequiredArgsConstructor
+public class ProductController {
+	
+	private final ProductService productService;
+	
+	@PostMapping("/product")
+	public Product createProduct(@RequestBody Product product)
+	{
+		productService.insertProduct(product);
+		return product;
+	}
+	
+}

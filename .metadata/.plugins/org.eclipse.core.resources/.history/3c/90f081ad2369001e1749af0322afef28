@@ -1,0 +1,8 @@
+package project.training.productcatalog.login.security;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class AdminSecurity {
+
+}

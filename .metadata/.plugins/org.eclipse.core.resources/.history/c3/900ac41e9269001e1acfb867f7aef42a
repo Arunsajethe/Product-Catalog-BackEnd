@@ -1,0 +1,5 @@
+package project.training.productcatalog.otp.controller;
+
+public class OtpController {
+
+}

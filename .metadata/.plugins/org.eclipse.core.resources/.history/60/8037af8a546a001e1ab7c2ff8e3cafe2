@@ -1,0 +1,61 @@
+package project.training.productcatalog.otp.controller;
+
+import java.io.UnsupportedEncodingException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpSession;
+import project.training.productcatalog.otp.model.Otp;
+import project.training.productcatalog.otp.service.OtpService;
+
+@RestController
+public class OtpController {
+	
+	@Autowired
+	private OtpService otpService;
+	
+	@CrossOrigin(origins = "http://localhost:4200/")
+	@PostMapping("/sendOtp")
+	public Otp sendOtp(@RequestBody String email, HttpSession session) throws UnsupportedEncodingException, MessagingException
+	{
+		System.out.println(email);
+		try 
+		{
+            
+            String otp = otpService.sendMail(email);
+            
+            Otp opt1 = new Otp();
+            
+            opt1.setOtp(otp);
+            
+            session.setAttribute("otp", opt1);
+            
+            return opt1;
+        } 
+		catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200/")
+	@GetMapping("/otp")
+	public Otp getOtp(HttpSession session)
+	{
+		System.out.println("Working");
+		return (Otp) session.getAttribute("otp");
+	}
+	
+	
+
+}

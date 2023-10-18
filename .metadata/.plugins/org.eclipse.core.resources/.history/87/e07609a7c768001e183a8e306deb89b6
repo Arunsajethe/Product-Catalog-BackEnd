@@ -1,0 +1,7 @@
+package project.training.productcatalog.login;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LoginRepository extends JpaRepository<T, ID> {
+
+}

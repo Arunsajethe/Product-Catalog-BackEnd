@@ -1,0 +1,28 @@
+package project.training.productcatalog.login.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import project.training.productcatalog.login.entity.Login;
+import project.training.productcatalog.login.repo.LoginRepository;
+
+public class MyUserDetailsService implements UserDetailsService {
+	
+	@Autowired
+	LoginRepository repo;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		
+		Login login = repo.findByEmail(username);
+		
+		if(login==null)
+			throw new UsernameNotFoundException("User 404");
+		
+		return new MyUserDetilas(login);
+	}
+
+}

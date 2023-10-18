@@ -1,0 +1,40 @@
+package project.training.productcatalog.product.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
+import project.training.productcatalog.product.dto.ProductResponse;
+import project.training.productcatalog.product.model.Product;
+import project.training.productcatalog.product.service.ProductService;
+
+@RestController
+@RequiredArgsConstructor
+public class ProductController {
+	
+	private final ProductService productService;
+	
+	@CrossOrigin(origins = "http://localhost:4200/")
+	@PostMapping("/product")
+	public Product createProduct(@RequestBody Product product)
+	{
+		System.out.println(product);
+		productService.insertProduct(product);
+		return product;
+	}
+	
+	
+	@CrossOrigin(origins = "http://localhost:4200/")
+	@GetMapping("/product")
+	public List<Product> ProductNameChecking( @RequestParam String pname, @RequestParam String category)
+	{		
+		return productService.checkProductNameExisting(pname, category);
+	}
+}

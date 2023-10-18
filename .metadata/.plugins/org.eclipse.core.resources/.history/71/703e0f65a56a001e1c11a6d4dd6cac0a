@@ -1,0 +1,26 @@
+package project.training.productcatalog.subproduct.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
+@Table(name = "my_sub_products")
+public class Sub_Product {
+
+	private Integer sid;
+	
+	private String sname;
+	
+	private String desp;
+	
+	private String validity;
+	
+}

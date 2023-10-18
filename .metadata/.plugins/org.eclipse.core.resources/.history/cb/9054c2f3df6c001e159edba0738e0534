@@ -1,0 +1,43 @@
+package project.training.productcatalog.product.rep;
+
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
+
+import project.training.productcatalog.product.dto.ProductResponse;
+import project.training.productcatalog.product.model.Product;
+import project.training.productcatalog.product.model.Sub_Product;
+
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+	
+	@Query("from Product where pname = ?1 and category = ?2")
+	List<Product> findByPnameCategory(String pname, String category);
+	
+	@Modifying
+	@Transactional
+	@Query("delete from Product where pname = ?1 and category =?2")
+	void removeProductItem(String pname, String category);
+	
+	@Query("from Product where pname = ?1 and category = ?2")
+	Product findByCategoryPname(String pname, String category);
+		
+	@Query("from Product where pname like ?1%")
+	List<Product> findByPname(String pname);
+	
+	@Query("from Product where pname=?1 and category=?2")
+	Product getProductId(String pname,String category);
+	
+	@Query(value=" SELECT subproducts_sid FROM t_product_subproducts WHERE product_pid= :pid ",nativeQuery = true)
+	List<Integer> getSubProductId(@Param("pid") Integer pid);
+	
+	@Modifying
+	@Transactional
+	@Query(value = "DELETE FROM sub_product where sid=:id",nativeQuery = true)
+	void deleteSubProduct(@Param ("id") Integer id);
+	
+	
+	
+}

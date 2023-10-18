@@ -1,0 +1,30 @@
+package project.training.productcatalog.otp.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import project.training.productcatalog.otp.service.OtpService;
+
+@RestController
+public class OtpController {
+	
+	@Autowired
+	private OtpService otpService;
+	
+	@PostMapping("/sendOtp")
+	public String sendOtp(@RequestBody String email)
+	{
+		String otp= generateOtp();
+		System.out.println("Email: "+email+" Otp: "+otp);
+		otpService.sendOtpEmail(email, otp);
+		return "Otp send to "+ email;
+	}
+	
+	private String generateOtp()
+	{
+		return String.valueOf((int)((Math.random()*900000)+100000));
+	}
+
+}

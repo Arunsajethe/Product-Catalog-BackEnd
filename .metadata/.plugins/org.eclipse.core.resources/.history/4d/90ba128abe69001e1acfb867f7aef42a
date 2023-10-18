@@ -1,0 +1,43 @@
+package project.training.productcatalog.otp.controller;
+
+import java.io.UnsupportedEncodingException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.mail.MessagingException;
+import project.training.productcatalog.otp.service.OtpService;
+
+@RestController
+public class OtpController {
+	
+	@Autowired
+	private OtpService otpService;
+	
+	@PostMapping("/sendOtp")
+	public String sendOtp(@RequestBody String email) throws UnsupportedEncodingException, MessagingException
+	{
+		try 
+		{
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode jsonNode = objectMapper.readTree(email);
+            String emailconvert = jsonNode.get("email").asText();
+
+            System.out.println("Email: " + emailconvert);
+            otpService.sendMail(emailconvert);
+            return "Email Sent";
+        } 
+		catch (Exception e) {
+            e.printStackTrace();
+            return "Error";
+        }
+	}
+	
+	
+
+}

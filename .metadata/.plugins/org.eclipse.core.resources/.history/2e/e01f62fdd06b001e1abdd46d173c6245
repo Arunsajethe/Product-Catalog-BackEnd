@@ -1,0 +1,89 @@
+package project.training.productcatalog.product.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import project.training.productcatalog.product.dto.ProductResponse;
+import project.training.productcatalog.product.model.Product;
+import project.training.productcatalog.product.model.Sub_Product;
+import project.training.productcatalog.product.rep.ProductRepository;
+
+@Service
+@RequiredArgsConstructor
+public class ProductService {
+		
+	private final ProductRepository repoP;
+	
+	
+	public Product insertProduct(Product product)
+	{
+		repoP.save(product);
+		return product;
+	}
+	
+	public List<ProductResponse> display()
+	{
+		List<Product> list =  repoP.findAll();
+		
+		List<ProductResponse> rlist = list.stream().map(prod->mapToProductResponse(prod)).toList();
+		
+		return rlist;
+	}
+
+	private ProductResponse mapToProductResponse(Product prod)
+	{
+		ProductResponse pr = ProductResponse.builder()
+								.pname(prod.getPname())
+								.features(prod.getFeatures())
+								.category(prod.getCategory())
+								.recommended(prod.getRecommended())
+								.subproducts(prod.getSubproducts())
+								.validity(prod.getValidity())
+								.build();
+		return pr;
+	}
+	
+	public List<Product> checkProductNameExisting(String pname, String category)
+	{
+		return repoP.findByPnameCategory(pname, category);
+	}
+	
+	public void deleteProduct(String pname, String category)
+	{
+		repoP.removeProductItem(pname, category);
+	}
+	
+	public ProductResponse getByCategoryAndName(String pname, String category)
+	{
+		Product prod =  repoP.findByCategoryPname(pname, category);
+		
+		ProductResponse rlist = mapToProductResponse(prod);
+		
+		return rlist;
+	}
+	
+	public ProductResponse updatingProduct(ProductResponse productResponse)
+	{
+		String pname = productResponse.getPname();
+		String category = productResponse.getCategory();
+		String recommend = productResponse.getRecommended();
+		Integer validity = productResponse.getValidity();
+		List<String> feature = productResponse.getFeatures();
+		List<Sub_Product> sub_Product = productResponse.getSubproducts();
+		
+		repoP.updateMyProduct(feature, validity, recommend, pname, category);
+		
+		return productResponse;
+	}
+	
+	public List<ProductResponse> searchByCategory(String pname)
+	{
+		List<Product> list =  repoP.findByPname(pname);
+		
+		List<ProductResponse> rlist = list.stream().map(prod -> mapToProductResponse(prod)).toList();
+		
+		return rlist;
+	}
+}

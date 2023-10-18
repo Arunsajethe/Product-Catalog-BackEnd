@@ -1,0 +1,5 @@
+package project.training.productcatalog.login.controller;
+
+public class LoginController {
+
+}

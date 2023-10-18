@@ -1,0 +1,5 @@
+package project.training.productcatalog.subproduct.controller;
+
+public class Sub_ProductController {
+
+}

@@ -1,0 +1,45 @@
+package project.training.productcatalog.subproduct.service;
+
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import project.training.productcatalog.subproduct.dto.Sub_ProductRequest;
+import project.training.productcatalog.subproduct.dto.Sub_ProductResponse;
+import project.training.productcatalog.subproduct.entity.Sub_Product;
+import project.training.productcatalog.subproduct.repo.Sub_ProductRepository;
+
+@Service
+@RequiredArgsConstructor
+public class Sub_ProductService {
+	
+	private final Sub_ProductRepository repo;
+	
+	public Sub_ProductRequest addSubproduct(Sub_Product product)
+	{
+		
+		return null;
+	}
+	
+	private Sub_ProductResponse mapToResponse(Sub_Product product)
+	{
+		Sub_ProductResponse productResponse = Sub_ProductResponse.builder()
+												.sname(product.getSname())
+												.desp(product.getDesp())
+												.validity(product.getValidity())
+												.build();
+		return productResponse;
+		
+	}
+	
+	private Sub_Product mapToRequest(Sub_ProductRequest productRequest)
+	{
+		Sub_Product product = Sub_Product.builder()
+											.sname(productRequest.getSname())
+											.desp(productRequest.getDesp())
+											.validity(productRequest.getValidity())
+											.build();
+		return product;
+		
+	}
+
+}

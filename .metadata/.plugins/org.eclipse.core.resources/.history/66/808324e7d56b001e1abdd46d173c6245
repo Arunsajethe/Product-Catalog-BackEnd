@@ -1,0 +1,13 @@
+package project.training.productcatalog.register.jpa;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import project.training.productcatalog.register.model.Registration;
+
+public interface RegistrationRepository extends JpaRepository<Registration, Integer> {
+
+	List<Registration> findByEmail(String email);
+	
+}

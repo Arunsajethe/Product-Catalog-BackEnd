@@ -1,0 +1,9 @@
+package project.training.productcatalog.product.rep;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import project.training.productcatalog.product.model.Product;
+
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+
+}

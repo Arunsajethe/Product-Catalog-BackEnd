@@ -1,0 +1,10 @@
+package project.training.productcatalog.product.model;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class Sub_Product {
+	
+	
+
+}

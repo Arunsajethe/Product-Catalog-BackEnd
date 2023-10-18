@@ -1,0 +1,11 @@
+package project.training.productcatalog.login.repo;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import project.training.productcatalog.login.entity.Login;
+
+public interface LoginRepository extends JpaRepository<Login, String> {
+	
+	
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;src&apos; to &apos;otp-service&apos;&#x0D;&#x0A;- Original project: &apos;Otp_Sending&apos;&#x0D;&#x0A;- Destination element: &apos;otp-service&apos;&#x0D;&#x0A;- Original element: &apos;src&apos;" description="Copy folder" element1="src" files="0" flags="589830" folders="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1697469571747" target="/product_catalog/otp-service" units="0" version="1.0"/>
+</session>
